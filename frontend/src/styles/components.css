@@ -1,0 +1,161 @@
+
+.btn-outline {
+    @apply border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white;
+}
+
+.btn-link {
+    @apply text-blue-500 hover:underline px-0;
+}
+
+/* Card Variants */
+.card-hover {
+    @apply transform transition-all duration-200 hover:-translate-y-1 hover:shadow-xl;
+}
+
+.card-bordered {
+    @apply border border-gray-200;
+}
+
+/* Input Groups */
+.input-group {
+    @apply flex items-center border rounded-lg overflow-hidden;
+}
+
+.input-group-text {
+    @apply px-4 py-2 bg-gray-50 text-gray-500 border-r;
+}
+
+.input-group input {
+    @apply border-none focus:ring-0;
+}
+
+/* Navigation Components */
+.navbar {
+    @apply bg-white shadow-sm sticky top-0 z-50;
+}
+
+.navbar-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.navbar-content {
+    @apply flex justify-between items-center h-16;
+}
+
+/* Footer Components */
+.footer {
+    @apply bg-gray-900 text-gray-300 py-12;
+}
+
+.footer-content {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Badge Components */
+.badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-primary {
+    @apply bg-blue-100 text-blue-800;
+}
+
+.badge-secondary {
+    @apply bg-gray-100 text-gray-800;
+}
+
+/* Avatar Components */
+.avatar {
+    @apply rounded-full overflow-hidden;
+}
+
+.avatar-sm {
+    @apply w-8 h-8;
+}
+
+.avatar-md {
+    @apply w-12 h-12;
+}
+
+.avatar-lg {
+    @apply w-16 h-16;
+}
+
+/* List Components */
+.list-group {
+    @apply divide-y divide-gray-200 rounded-lg overflow-hidden;
+}
+
+.list-group-item {
+    @apply p-4 hover:bg-gray-50;
+}
+
+/* Dropdown Components */
+.dropdown {
+    @apply relative inline-block;
+}
+
+.dropdown-content {
+    @apply absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5;
+}
+
+.dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+}
+
+/* Modal Components */
+.modal-backdrop {
+    @apply fixed inset-0 bg-black bg-opacity-50;
+}
+
+.modal-container {
+    @apply fixed inset-0 z-50 overflow-y-auto;
+}
+
+.modal-content {
+    @apply relative bg-white rounded-lg mx-auto my-8 max-w-lg p-6;
+}
+
+/* Tooltip Components */
+.tooltip {
+    @apply relative inline-block;
+}
+
+.tooltip-content {
+    @apply absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm;
+}
+
+/* Progress Bar */
+.progress {
+    @apply w-full bg-gray-200 rounded-full h-2.5;
+}
+
+.progress-bar {
+    @apply bg-blue-500 h-2.5 rounded-full;
+}
+
+/* Tabs */
+.tabs {
+    @apply flex border-b border-gray-200;
+}
+
+.tab {
+    @apply py-2 px-4 border-b-2 border-transparent hover:border-gray-300;
+}
+
+.tab-active {
+    @apply border-blue-500 text-blue-600;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    @apply flex items-center space-x-2 text-sm text-gray-500;
+}
+
+.breadcrumb-item {
+    @apply hover:text-gray-900;
+}
+
+.breadcrumb-separator {
+    @apply text-gray-400;
+}

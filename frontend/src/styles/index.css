@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Root Variables */
+:root {
+    --primary-color: #1E3A8A;    /* 진한 남색 */
+    --secondary-color: #1E40AF;  /* 약간 밝은 남색 */
+    --background-color: #0F172A; /* 어두운 남색 배경 */
+    --card-background: #1a1d3d;  /* 카드 배경색 */
+    --text-primary: #E2E8F0;     /* 밝은 텍스트 */
+    --text-secondary: #94A3B8;   /* 회색빛 텍스트 */
+    --success-color: #059669;    /* 어두운 초록 */
+    --error-color: #DC2626;      /* 어두운 빨강 */
+    --warning-color: #D97706;    /* 어두운 주황 */
+    --border-color: rgba(255, 255, 255, 0.1); /* 테두리 색상 */
+}
+
+/* Global Styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* 카드 스타일 */
+.card {
+    @apply bg-[#1a1d3d] rounded-lg shadow-lg overflow-hidden border border-opacity-10 border-white;
+}
+
+.card-body {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px -1px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+/* 버튼 스타일 */
+.btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-200 font-medium;
+}
+
+.btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+    @apply bg-gray-700 text-white hover:bg-gray-600;
+}
+
+.btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+/* 폼 요소 */
+.form-input {
+    @apply w-full px-4 py-2 bg-gray-800 border-gray-700 text-white rounded-lg
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+    transition-all duration-200;
+}
+
+.form-label {
+    @apply block text-gray-300 mb-2 font-medium;
+}
+
+.form-error {
+    @apply text-red-400 text-sm mt-1;
+}
+
+/* 테이블 스타일 */
+.table-container {
+    @apply w-full overflow-x-auto bg-gray-900 rounded-lg;
+}
+
+.table {
+    @apply min-w-full divide-y divide-gray-700;
+}
+
+.table th {
+    @apply px-6 py-3 bg-gray-800 text-left text-xs font-medium text-gray-300 uppercase tracking-wider;
+}
+
+.table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-300 border-b border-gray-700;
+}
+
+/* 네비게이션 */
+.nav-link {
+    @apply px-4 py-2 text-gray-300 hover:text-blue-400 transition-colors duration-200;
+}
+
+.nav-link-active {
+    @apply text-blue-400 font-medium;
+}
+
+/* 알림 스타일 */
+.alert {
+    @apply p-4 rounded-lg mb-4 border;
+}
+
+.alert-success {
+    @apply bg-green-900 border-green-700 text-green-100;
+}
+
+.alert-error {
+    @apply bg-red-900 border-red-700 text-red-100;
+}
+
+.alert-warning {
+    @apply bg-yellow-900 border-yellow-700 text-yellow-100;
+}
+
+/* 타이포그래피 */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+p {
+    @apply text-gray-300 leading-relaxed;
+}
+
+/* 호버 효과 */
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px -2px rgba(0, 0, 0, 0.4);
+    background-color: #1e2147;
+}
+
+.hover-scale {
+    @apply transform transition-transform duration-200 hover:scale-105;
+}
+
+.hover-shadow {
+    @apply transition-shadow duration-200 hover:shadow-xl;
+}
+
+/* 로딩 상태 */
+.loading {
+    @apply animate-pulse bg-gray-700 rounded;
+}
+
+/* 섹션 스타일 */
+.section-header {
+    background-color: #161938;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.section-title {
+    @apply text-2xl font-bold mb-6 text-gray-100;
+}
+
+/* 그리드 레이아웃 */
+.grid-container {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
