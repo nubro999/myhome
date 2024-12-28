@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 
     private final PostService postService;
@@ -29,19 +29,19 @@ public class PostController {
     }
 
     // 게시글 조회
-    @GetMapping("/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable Long id) {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
     // 게시글 수정
-    @PutMapping("/{id}")
+    @PutMapping("/posts/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
         return ResponseEntity.ok(postService.updatePost(id, updatedPost));
     }
 
     // 게시글 삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/posts/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();

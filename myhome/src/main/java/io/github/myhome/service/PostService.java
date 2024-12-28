@@ -31,11 +31,11 @@ public class PostService {
     }
 
     // 게시글 수정
+    @Transactional
     public Post updatePost(Long id, Post updatedPost) {
         Post post = getPostById(id);
         post.setTitle(updatedPost.getTitle());
         post.setContent(updatedPost.getContent());
-        post.setAuthor(updatedPost.getAuthor()); //이건 삭제해도 될듯
         return postRepository.save(post);
     }
 

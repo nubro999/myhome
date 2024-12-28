@@ -6,9 +6,8 @@ interface Post {
     id: number;
     title: string;
     author: string;
-    date: string;
-    views: number;
-    likes: number;
+    createAt: string;
+    updateAt: string;
 }
 
 const Board = () => {
@@ -38,26 +37,32 @@ const Board = () => {
     }, [searchTerm, posts]);
 
     // 새 글 작성
-    const handleCreatePost = () => {
-        api.post<Post>('/api/posts', newPost).then((res) => {
-            setPosts([...posts, res.data]);
-            setFilteredPosts([...posts, res.data]);
+    const handleCreatePost = async () => {
+        try {
+            const res = await api.post<Post>('/api/posts', newPost);
+            const updatedPosts = [...posts, res.data];
+            setPosts(updatedPosts);
+            setFilteredPosts(updatedPosts); // posts와 filteredPosts를 동일하게 유지
             setNewPost({ title: '', author: '', content: '' });
             setIsModalOpen(false);
-        });
+        } catch (error) {
+            console.error('Error creating post:', error);
+        }
     };
+
 
     // 글 삭제
     const handleDeletePost = async (postId: number) => {
         try {
-            await axios.delete(`http://localhost:8080/api/posts/${postId}`, {
-                withCredentials: true, // 인증 정보 포함
-            });
+            await api.delete(`/api/posts/${postId}`);
+            setPosts(posts.filter((post) => post.id !== postId)); // 삭제된 게시글 제거
+            setFilteredPosts(filteredPosts.filter((post) => post.id !== postId));
             console.log('Post deleted successfully');
         } catch (error) {
             console.error('Error deleting post:', error);
         }
     };
+
 
     return (
         <div className="space-y-6">
