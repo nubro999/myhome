@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User } from 'lucide-react';
+import { Lock, User } from 'lucide-react';
+import axios from 'axios';
 
 const Register = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
-        confirmPassword: '',
-        name: ''
+        confirmPassword: ''
     });
-    const [error, setError] = useState('');
+    const [error, setError] = useState<string>(''); // 에러 메시지는 항상 문자열
+    const [success, setSuccess] = useState<string>(''); // 성공 메시지도 항상 문자열
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -25,14 +26,35 @@ const Register = () => {
 
         if (formData.password !== formData.confirmPassword) {
             setError('비밀번호가 일치하지 않습니다.');
+            setSuccess('');
             return;
         }
 
         try {
-            // TODO: Implement registration logic
-            navigate('/login');
-        } catch (err) {
-            setError('회원가입에 실패했습니다. 다시 시도해주세요.');
+            setError('');
+            const response = await axios.post('/api/auth/register', {
+                username: formData.username,
+                password: formData.password
+            });
+
+            const successMessage = typeof response.data === 'string'
+                ? response.data
+                : '회원가입이 완료되었습니다.';
+
+            setSuccess(successMessage);
+            setFormData({
+                username: '',
+                password: '',
+                confirmPassword: ''
+            });
+
+            setTimeout(() => navigate('/login'), 2000);
+        } catch (err: any) {
+            const errorMessage = typeof err.response?.data === 'string'
+                ? err.response.data
+                : err.response?.data?.error || '회원가입에 실패했습니다. 다시 시도해주세요.';
+            setError(errorMessage);
+            setSuccess('');
         }
     };
 
@@ -48,36 +70,24 @@ const Register = () => {
                         </div>
                     )}
 
+                    {success && (
+                        <div className="alert alert-success mb-4">
+                            {success}
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label htmlFor="email" className="form-label">이메일</label>
+                            <label htmlFor="username" className="form-label">아이디</label>
                             <div className="input-group">
-                <span className="input-group-text">
-                  <Mail className="w-5 h-5" />
-                </span>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="form-input"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="name" className="form-label">이름</label>
-                            <div className="input-group">
-                <span className="input-group-text">
-                  <User className="w-5 h-5" />
-                </span>
+                                <span className="input-group-text">
+                                    <User className="w-5 h-5" />
+                                </span>
                                 <input
                                     type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
+                                    id="username"
+                                    name="username"
+                                    value={formData.username}
                                     onChange={handleChange}
                                     className="form-input"
                                     required
@@ -88,9 +98,9 @@ const Register = () => {
                         <div>
                             <label htmlFor="password" className="form-label">비밀번호</label>
                             <div className="input-group">
-                <span className="input-group-text">
-                  <Lock className="w-5 h-5" />
-                </span>
+                                <span className="input-group-text">
+                                    <Lock className="w-5 h-5" />
+                                </span>
                                 <input
                                     type="password"
                                     id="password"
@@ -106,9 +116,9 @@ const Register = () => {
                         <div>
                             <label htmlFor="confirmPassword" className="form-label">비밀번호 확인</label>
                             <div className="input-group">
-                <span className="input-group-text">
-                  <Lock className="w-5 h-5" />
-                </span>
+                                <span className="input-group-text">
+                                    <Lock className="w-5 h-5" />
+                                </span>
                                 <input
                                     type="password"
                                     id="confirmPassword"
@@ -121,17 +131,15 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-primary w-full">
-                            회원가입
-                        </button>
+                        <button type="submit" className="btn btn-primary w-full">회원가입</button>
                     </form>
 
-                    <div className="mt-4 text-center">
-                        <span className="text-gray-600">이미 계정이 있으신가요? </span>
-                        <Link to="/login" className="text-blue-500 hover:underline">
+                    <p className="text-center mt-4">
+                        이미 계정이 있으신가요?{' '}
+                        <Link to="/login" className="text-primary">
                             로그인
                         </Link>
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>
@@ -139,3 +147,5 @@ const Register = () => {
 };
 
 export default Register;
+
+

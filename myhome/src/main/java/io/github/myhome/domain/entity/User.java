@@ -1,24 +1,26 @@
 package io.github.myhome.domain.entity;
+
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username; // 사용자 이름 (로그인 ID)
+    private String username;
 
     @Column(nullable = false)
-    private String password; // 비밀번호 (암호화 필요)
+    private String password;
 
     @Column(nullable = false)
-    private String role; // 사용자 권한 (예: ROLE_USER, ROLE_ADMIN)
+    private String role; // ROLE_USER 또는 ROLE_ADMIN
 }
 

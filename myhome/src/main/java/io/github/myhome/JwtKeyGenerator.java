@@ -1,4 +1,4 @@
-/*
+package io.github.myhome;/*
 package io.github.myhome;
 
 import io.github.myhome.domain.entity.Gallery;
@@ -49,6 +49,5 @@ public class DataInitializer implements CommandLineRunner {
         System.out.println("초기 데이터가 저장되었습니다: " + gallery2);
         System.out.println("초기 데이터가 저장되었습니다: " + gallery3);
     }
-}*/
-
-
+}
+*/

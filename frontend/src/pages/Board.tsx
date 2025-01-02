@@ -55,8 +55,9 @@ const Board = () => {
     const handleDeletePost = async (postId: number) => {
         try {
             await api.delete(`/api/posts/${postId}`);
-            setPosts(posts.filter((post) => post.id !== postId)); // 삭제된 게시글 제거
-            setFilteredPosts(filteredPosts.filter((post) => post.id !== postId));
+            const updatedPosts = posts.filter((post) => post.id !== postId);
+            setPosts(updatedPosts);
+            setFilteredPosts(updatedPosts); // posts와 filteredPosts를 동기화
             console.log('Post deleted successfully');
         } catch (error) {
             console.error('Error deleting post:', error);

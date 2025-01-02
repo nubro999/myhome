@@ -16,21 +16,78 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            // TODO: Validate token and get user info
-            setIsAuthenticated(true);
+            validateToken(token).then((userInfo) => {
+                if (userInfo) {
+                    setUser(userInfo);
+                    setIsAuthenticated(true);
+                } else {
+                    setIsAuthenticated(false);
+                }
+            });
         }
     }, []);
+
+    const validateToken = async (token: string) => {
+        try {
+            const response = await fetch('/api/auth/validate-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Invalid token');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Token validation failed:', error);
+            return null;
+        }
+    };
+
+    const fetchUserInfo = async (token: string) => {
+        try {
+            const response = await fetch('/api/auth/user-info', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch user info');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching user info:', error);
+            return null;
+        }
+    };
 
     const login = (token: string) => {
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
-        // TODO: Set user info
+
+        fetchUserInfo(token).then((userInfo) => {
+            if (userInfo) {
+                setUser(userInfo);
+            }
+        });
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
-        setUser(null);
-        setIsAuthenticated(false);
+        fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).finally(() => {
+            localStorage.removeItem('token');
+            setUser(null);
+            setIsAuthenticated(false);
+        });
     };
 
     return (
