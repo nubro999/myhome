@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Lock } from 'lucide-react';
-
-// 로그인 API 응답 데이터 타입 정의
-interface LoginResponse {
-    token: string; // JWT 토큰
-    user: {
-        id: number;
-        username: string;
-    };
-}
+import AuthContext from '../contexts/AuthContext'; // AuthContext 경로를 실제 프로젝트에 맞게 수정
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -18,24 +9,26 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    // AuthContext에서 login 메서드 가져오기
+    const authContext = useContext(AuthContext);
+
+    if (!authContext) {
+        throw new Error('AuthContext가 정의되지 않았습니다. AuthProvider로 감싸져 있는지 확인하세요.');
+    }
+
+    const { login } = authContext;
+
     const handleSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         try {
-            // 서버에 로그인 요청
-            const response = await axios.post<LoginResponse>('/api/auth/login', { username, password });
+            // AuthContext의 login 메서드 호출
+            await login(username, password);
 
-            // JWT 토큰 저장 (로컬 스토리지에 저장)
-            const token = response.data.token; // 백엔드가 반환하는 JWT 토큰
-            localStorage.setItem('token', token);
-
-            // 로그인 성공 메시지 출력
-            console.log('로그인 성공:', response.data);
-
-            // 페이지 이동 (로그인 성공 시 홈으로 이동)
+            // 로그인 성공 시 홈으로 이동
             navigate('/');
         } catch (err: any) {
             // 에러 처리 (백엔드에서 반환된 에러 메시지 또는 기본 메시지 사용)
-            const errorMessage = err.response?.data?.message || '로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.';
+            const errorMessage = err.message || '로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.';
             setError(errorMessage);
         }
     };
@@ -110,4 +103,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
 
