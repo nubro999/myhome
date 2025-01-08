@@ -1,8 +1,9 @@
 package io.github.myhome.domain.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,17 +17,17 @@ public class Gallery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String url;
-
-    @Column(nullable = false)
     private String title;
 
     private String description;
 
-    @Column(nullable = false)
     private String category;
 
+    private String fileName;
+
+    // 기본값을 빈 문자열로 설정
     @Column(nullable = false)
-    private LocalDate date;
+    private String imagePath = "";
+
+    // Getters and Setters
 }

@@ -4,6 +4,7 @@ import io.github.myhome.domain.entity.Gallery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,19 +17,31 @@ public class GalleryController {
 
     // 모든 이미지 가져오기
     @GetMapping
-    public ResponseEntity<List<Gallery>> getAllGallery(@RequestParam(required = false, defaultValue = "all") String category) {
-        List<Gallery> galleries = galleryService.getGalleryByCategory(category);
-        return ResponseEntity.ok(galleries);
+    public ResponseEntity<List<Gallery>> getAllGallery() {
+        System.out.println("컨트롤러 이미지 가져오기");
+        return ResponseEntity.ok(galleryService.getAllGallery());
     }
 
-    // 이미지 업로드
+    // 카테고리별 이미지 가져오기
+    @GetMapping("/{category}")
+    public ResponseEntity<List<Gallery>> getGalleryByCategory(@PathVariable String category) {
+        return ResponseEntity.ok(galleryService.getGalleryByCategory(category));
+    }
+
+    // 이미지 업로드 (파일 & 추가 데이터)
     @PostMapping
-    public ResponseEntity<Gallery> uploadGallery(@RequestBody Gallery gallery) {
-        Gallery savedgallery = galleryService.saveGallery(gallery);
-        return ResponseEntity.ok(savedgallery);
+    public ResponseEntity<Gallery> uploadGallery(
+            @RequestParam("file") MultipartFile file,           // 파일 이름 'file'
+            @RequestParam("title") String title,                // 제목
+            @RequestParam("description") String description,    // 설명
+            @RequestParam("category") String category
+            ) {
+        // Service 호출
+        Gallery gallery = galleryService.uploadGallery(file, title, description, category);
+        return ResponseEntity.ok(gallery);
     }
 
-    // 이미지 삭제
+    // 특정 이미지 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGallery(@PathVariable Long id) {
         galleryService.deleteGallery(id);
