@@ -14,39 +14,28 @@ interface Image {
 const Gallery = () => {
     const { isAuthenticated } = useAuth();
     const [activeCategory, setActiveCategory] = useState('all');
-    const [images, setImages] = useState<Image[]>([]); // 초기값을 빈 배열로 설정
+    const [images, setImages] = useState<Image[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [page, setPage] = useState(0);
-    const [isLastPage, setIsLastPage] = useState(false);
     const [isUploadModalOpen, setUploadModalOpen] = useState(false);
 
     const categories = ['all', 'project', 'daily', 'event'];
 
     // 이미지 목록 가져오기
-    const fetchImages = async (category: string, nextPage: number = 0) => {
+    const fetchImages = async (category: string) => {
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`/api/gallery?category=${category}&page=${nextPage}`);
+            const response = await fetch(`/api/gallery?category=${category}`);
             if (!response.ok) {
                 console.error('API 호출 실패:', response.status, response.statusText);
                 throw new Error('이미지를 가져오는 데 실패했습니다.');
             }
 
-            const data: { images: Image[]; lastPage: boolean } = await response.json();
+            const data: Image[] = await response.json();
 
-            // API 응답 데이터 검증
-            if (!data || !Array.isArray(data.images)) {
-                throw new Error('API 응답이 잘못되었습니다. images가 배열이 아닙니다.');
-            }
-
-            setImages((prevImages) =>
-                nextPage === 0 ? data.images : [...prevImages, ...data.images]
-            );
-            setIsLastPage(data.lastPage);
-            setPage(nextPage);
+            setImages(data);
         } catch (err: any) {
             console.error(err.message || '알 수 없는 오류가 발생했습니다.');
             setError(err.message || '알 수 없는 오류가 발생했습니다.');
@@ -56,7 +45,6 @@ const Gallery = () => {
     };
 
     useEffect(() => {
-        setImages([]); // 상태 초기화
         fetchImages(activeCategory);
     }, [activeCategory]);
 
@@ -72,8 +60,7 @@ const Gallery = () => {
                 throw new Error('이미지 업로드에 실패했습니다.');
             }
 
-            setPage(0);
-            fetchImages(activeCategory, 0);
+            fetchImages(activeCategory);
             setUploadModalOpen(false);
         } catch (err: any) {
             console.error(err.message || '업로드 중 오류가 발생했습니다.');
@@ -115,7 +102,7 @@ const Gallery = () => {
             {error && <div className="text-red-500 text-center">{error}</div>}
             {loading && <div className="text-center">로딩 중...</div>}
 
-            {!loading && !error && Array.isArray(images) && images.length > 0 ? (
+            {!loading && !error && images.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {images.map((image) => (
                         <div key={image.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -131,17 +118,6 @@ const Gallery = () => {
                 !error && <div className="text-center text-gray-500">이미지가 없습니다.</div>
             )}
 
-            {!isLastPage && !loading && (
-                <div className="text-center">
-                    <button
-                        className="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
-                        onClick={() => fetchImages(activeCategory, page + 1)}
-                    >
-                        더 보기
-                    </button>
-                </div>
-            )}
-
             {isUploadModalOpen && (
                 <UploadModal
                     isOpen={isUploadModalOpen}
@@ -154,5 +130,6 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
 
 

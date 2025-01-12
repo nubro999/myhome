@@ -25,6 +25,7 @@ public class GalleryController {
     // 카테고리별 이미지 가져오기
     @GetMapping("/{category}")
     public ResponseEntity<List<Gallery>> getGalleryByCategory(@PathVariable String category) {
+        System.out.println("카테고리 이미지 가져오기");
         return ResponseEntity.ok(galleryService.getGalleryByCategory(category));
     }
 
@@ -38,6 +39,7 @@ public class GalleryController {
             ) {
         // Service 호출
         Gallery gallery = galleryService.uploadGallery(file, title, description, category);
+        System.out.println("이미지 업로드 가져오기");
         return ResponseEntity.ok(gallery);
     }
 
