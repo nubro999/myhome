@@ -21,13 +21,12 @@ public class Gallery {
 
     private String description;
 
-    private String category;
 
     private String fileName;
 
     // 기본값을 빈 문자열로 설정
     @Column(nullable = false)
-    private String imagePath = "";
+    private String fileUrl = "";
 
     // Getters and Setters
 }

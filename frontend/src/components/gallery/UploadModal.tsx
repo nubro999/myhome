@@ -9,7 +9,6 @@ interface UploadModalProps {
 const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("project");
     const [file, setFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -49,7 +48,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
             formData.append("file", file);
             formData.append("title", title);
             formData.append("description", description);
-            formData.append("category", category);
 
             await onUpload(formData);
 
@@ -70,7 +68,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
         setTitle("");
         setDescription("");
         setFile(null);
-        setCategory("project");
         setError(null);
         onClose();
     };
@@ -120,19 +117,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-gray-700">카테고리</label>
-                        <select
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
-                            className="block w-full border rounded-lg p-2"
-                        >
-                            <option value="project">Project</option>
-                            <option value="daily">Daily</option>
-                            <option value="event">Event</option>
-                        </select>
-                    </div>
-
                     <div className="flex justify-end space-x-2">
                         <button
                             type="button"
@@ -157,3 +141,4 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
 };
 
 export default UploadModal;
+
