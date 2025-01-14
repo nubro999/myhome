@@ -86,10 +86,9 @@ const Gallery = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {images.map((image) => (
                         <div key={image.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                            {/* Spring Boot에서 제공하는 fileUrl 사용 */}
-                            <img src={image.fileUrl} alt={image.title} className="w-full" />
+                            <img src={image.fileUrl} alt={image.title} className="w-full " />
                             <div className="p-4">
-                                <h3 className="font-semibold">{image.title}</h3>
+                                <h3 className="text-xl font-semibold mb-4 text-gray-500">{image.title}</h3>
                                 <p className="text-gray-500">{image.description}</p>
                             </div>
                         </div>

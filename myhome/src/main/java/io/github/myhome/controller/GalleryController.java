@@ -53,7 +53,7 @@ public class GalleryController {
     public ResponseEntity<Resource> getFile(@PathVariable String fileName) {
         try {
             // 파일 경로 설정
-            Path filePath = Paths.get("C:/uploads").resolve(fileName).normalize();
+            Path filePath = Paths.get("C:/uploads/").resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
 
             if (resource.exists()) {

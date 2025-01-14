@@ -21,7 +21,7 @@ public class GalleryService {
     private final GalleryRepo galleryRepository;
 
     // 파일 저장 경로
-    private final String uploadDir = "C:/uploads";
+    private final String uploadDir = "C:/uploads/";
 
     // 모든 갤러리 가져오기
     public List<Gallery> getAllGallery() {

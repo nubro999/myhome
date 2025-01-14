@@ -10,6 +10,7 @@
     --card-background: #1a1d3d;  /* 카드 배경색 */
     --text-primary: #E2E8F0;     /* 밝은 텍스트 */
     --text-secondary: #94A3B8;   /* 회색빛 텍스트 */
+    --text-whiteback: #1f1f20;
     --success-color: #059669;    /* 어두운 초록 */
     --error-color: #DC2626;      /* 어두운 빨강 */
     --warning-color: #D97706;    /* 어두운 주황 */

@@ -19,7 +19,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center h-16">
                     {/* 로고 */}
                     <Link to="/" className="text-2xl font-bold text-blue-400 hover:text-blue-300">
-                        My Blog
+                        NuBroooo
                     </Link>
 
                     {/* 데스크톱 메뉴 */}

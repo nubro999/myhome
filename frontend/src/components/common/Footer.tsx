@@ -23,7 +23,7 @@ const Footer = () => {
                         </p>
                         <div className="flex space-x-4">
                             <a
-                                href="https://github.com/yourgithub"
+                                href="https://github.com/nubro999"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-white transition-colors"
@@ -39,7 +39,7 @@ const Footer = () => {
                                 <Linkedin size={20} />
                             </a>
                             <a
-                                href="mailto:your.email@example.com"
+                                href="mailto:zcb167@gmail.com"
                                 className="hover:text-white transition-colors"
                             >
                                 <Mail size={20} />
@@ -75,7 +75,7 @@ const Footer = () => {
                         <ul className="space-y-2 text-sm">
                             <li>홍익대학교</li>
                             <li>English Literature & Computer Science</li>
-                            <li>Email: your.email@example.com</li>
+                            <li>Email: zcb167@gmail.com</li>
                         </ul>
                     </div>
                 </div>
