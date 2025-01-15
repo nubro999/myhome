@@ -43,7 +43,7 @@ dependencies {
 
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+springBoot {
+	mainClass = 'io.github.myhome.MyhomeApplication'
 }
 
