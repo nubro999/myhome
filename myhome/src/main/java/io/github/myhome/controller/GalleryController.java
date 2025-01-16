@@ -3,15 +3,11 @@ package io.github.myhome.controller;
 import io.github.myhome.service.GalleryService;
 import io.github.myhome.domain.entity.Gallery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -48,25 +44,15 @@ public class GalleryController {
         return ResponseEntity.noContent().build();
     }
 
-    // 업로드된 파일 제공
+    // S3에서 업로드된 파일 제공 (URL 리다이렉션)
     @GetMapping("/files/{fileName}")
-    public ResponseEntity<Resource> getFile(@PathVariable String fileName) {
-        try {
-            // 파일 경로 설정
-            Path filePath = Paths.get("C:/uploads/").resolve(fileName).normalize();
-            Resource resource = new UrlResource(filePath.toUri());
+    public ResponseEntity<Void> getFile(@PathVariable String fileName) {
+        // S3 파일 URL 가져오기
+        String fileUrl = galleryService.getFileUrl(fileName);
 
-            if (resource.exists()) {
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+        // 클라이언트가 S3 URL로 바로 리다이렉트하도록 설정
+        return ResponseEntity.status(302) // HTTP 302 Found (리다이렉션)
+                .header(HttpHeaders.LOCATION, fileUrl)
+                .build();
     }
 }
-
-

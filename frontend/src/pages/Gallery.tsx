@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Trash } from 'lucide-react'; // Trash 아이콘 추가
 import { useAuth } from '../contexts/AuthContext';
 import UploadModal from '../components/gallery/UploadModal';
 
@@ -64,6 +64,30 @@ const Gallery = () => {
         }
     };
 
+    // 이미지 삭제 핸들러
+    const handleDelete = async (id: number): Promise<void> => {
+        if (!window.confirm('정말로 이미지를 삭제하시겠습니까?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/gallery/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                console.error('삭제 실패:', response.status, response.statusText);
+                throw new Error('이미지 삭제에 실패했습니다.');
+            }
+
+            // 삭제 후 이미지 목록 갱신
+            fetchImages();
+        } catch (err: any) {
+            console.error(err.message || '삭제 중 오류가 발생했습니다.');
+            setError('이미지 삭제 중 오류가 발생했습니다.');
+        }
+    };
+
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -86,10 +110,20 @@ const Gallery = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {images.map((image) => (
                         <div key={image.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src={image.fileUrl} alt={image.title} className="w-full " />
-                            <div className="p-4">
-                                <h3 className="text-xl font-semibold mb-4 text-gray-500">{image.title}</h3>
-                                <p className="text-gray-500">{image.description}</p>
+                            <img src={image.fileUrl} alt={image.title} className="w-full" />
+                            <div className="p-4 flex justify-between items-center">
+                                <div>
+                                    <h3 className="text-xl font-semibold mb-2 text-gray-500">{image.title}</h3>
+                                    <p className="text-gray-500">{image.description}</p>
+                                </div>
+                                {isAuthenticated && (
+                                    <button
+                                        onClick={() => handleDelete(image.id)}
+                                        className="text-red-500 hover:text-red-700 transition-colors"
+                                    >
+                                        <Trash size={20} />
+                                    </button>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -111,7 +145,6 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
 
 
 
