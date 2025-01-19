@@ -156,7 +156,7 @@ const Portfolio = () => {
                 <div className="modal modal-open">
                     <div className="modal-box">
                         <h2 className="text-xl font-semibold mb-4">새 포트폴리오 추가</h2>
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 gap-4 text-gray-600">
                             <input
                                 type="text"
                                 placeholder="프로젝트 제목"
