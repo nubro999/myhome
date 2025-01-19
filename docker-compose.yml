@@ -34,19 +34,19 @@ services:
     networks:
       - my-network
 
-  frontend:
-    image: react-frontend
-    container_name: react-container
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    networks:
-      - my-network
+ # frontend:
+  #  image: react-frontend
+   # container_name: react-container
+    #build:
+     # context: ./frontend
+      #dockerfile: Dockerfile
+    #restart: always
+    #ports:
+     # - "3000:80"
+    #depends_on:
+     # - backend
+    #networks:
+     # - my-network
 
 networks:
   my-network:
