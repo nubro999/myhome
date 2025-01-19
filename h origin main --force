@@ -1,0 +1,168 @@
+[33mcommit 9178f969268e6d422155625d429e629cab19d074[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 16:29:51 2025 +0900
+
+    Remove resources directory
+
+[33mcommit b45d99e6b88a7f0b445a51cd37af28d9aeff23df[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 16:17:38 2025 +0900
+
+    Remove sensitive file
+
+[33mcommit ed480458330d0ea209ffea63b865c67f290cfbad[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 16:14:56 2025 +0900
+
+    all connection done!
+
+[33mcommit ccde4e323695d2f6743a4c6c0c7a70f110719cfc[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 16:10:08 2025 +0900
+
+    all connection done!
+
+[33mcommit d6bb06ed886cc86333eae8b6f850c61b72683eab[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 15:55:38 2025 +0900
+
+    all connection done!
+
+[33mcommit cbd09c76b1bb1faccef0fda7cd6c1f5fec199d28[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 15:54:28 2025 +0900
+
+    all connection done!
+
+[33mcommit 90883ded2da887fa3e6082c8280e2ceca2bc116d[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 19 15:52:30 2025 +0900
+
+    all connection done!
+
+[33mcommit 056df5c6e65b9b2c73bd6c4086b1392e469f87e7[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Fri Jan 17 15:25:57 2025 +0900
+
+    network conncection failure
+
+[33mcommit cdb97338492af178adc0db838e8007ae4b47c977[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Thu Jan 16 17:26:45 2025 +0900
+
+    docker container properties
+
+[33mcommit f98676f8c3025684c8611ebd0b1c46535f2ecde2[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Wed Jan 15 17:55:27 2025 +0900
+
+    docker container properties
+
+[33mcommit 74fd7226346925c372f7713676d036a13721f586[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Tue Jan 14 21:25:00 2025 +0900
+
+    details&dokerfile
+
+[33mcommit e35927b7f6fc8ff1e8f3480570e2481a3d076ff7[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Mon Jan 13 00:52:35 2025 +0900
+
+    finally,,gallery complete
+
+[33mcommit 66678d681d766580b744f3e1d524650741a41f9b[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 12 23:07:55 2025 +0900
+
+    still has image file fetching problem
+
+[33mcommit 70e6e063b991efa094354aee1a2fadee7427e469[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Wed Jan 8 22:57:50 2025 +0900
+
+    still has image file fetching problem
+
+[33mcommit 0c337eb8af98ebb50f4c7e233ab19519c425c2b9[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Tue Jan 7 16:20:04 2025 +0900
+
+    portfolio fuction applied
+
+[33mcommit 336597e8bb828b27bd939321cd84c620904dbd01[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Jan 5 17:58:41 2025 +0900
+
+    login condition substance & logout success
+
+[33mcommit 21db8f63f53ad86c28514d8fd5f635473ed12146[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Fri Jan 3 00:14:54 2025 +0900
+
+    JWT token auth method!
+
+[33mcommit d8471d01ce757c9120ab0fd8513dd3ccf1bce3b3[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Dec 29 01:45:31 2024 +0900
+
+    Login method -- not success yet
+
+[33mcommit bb134e6cfaefdfe83135e9331641ab276d5cce0e[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sat Dec 28 16:52:36 2024 +0900
+
+    delete method success!
+
+[33mcommit c5731d4473efc16b75d5ec3ac5fb5d780b751abd[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sat Dec 28 16:24:11 2024 +0900
+
+    delete method
+
+[33mcommit 4615dfb5b74be5c53b1afe7f63651016d8871b8d[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sat Dec 28 02:11:17 2024 +0900
+
+    back & front connect success
+
+[33mcommit a68f92b788d39270ea6c6d1f3c491e00a402cf5b[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Thu Dec 26 21:03:34 2024 +0900
+
+    post fuction back & front
+
+[33mcommit ca91a54bb3ee6bd05c5f4898f1643fc66908fe5a[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Nov 24 19:36:42 2024 +0900
+
+    frontend design and routing
+
+[33mcommit eb80dcb0d2910c1bc831d0c13a095e29859d5976[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Sun Nov 24 01:21:50 2024 +0900
+
+    intergrate frontend backend to full-myhome
+
+[33mcommit 2ac218056bd1bdfbc3af626341a36e4292166926[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Fri Nov 22 22:26:06 2024 +0900
+
+    frontend file construct
+
+[33mcommit fbe8be1c289038d8e0be63605623ed21f1567919[m
+Merge: 854758d 17dfae3
+Author: nubro999 <zcb167@gmail.com>
+Date:   Thu Nov 21 21:51:21 2024 +0900
+
+    Merge branch 'main' of https://github.com/nubro999/myhome
+
+[33mcommit 854758d124741300bf4802ba31901d40901f7ca4[m
+Author: nubro999 <zcb167@gmail.com>
+Date:   Thu Nov 21 21:42:26 2024 +0900
+
+    first commit
+
+[33mcommit 17dfae39ef3b2e0042795c03a988106cf4526c4f[m
+Author: nubro999 <109833173+nubro999@users.noreply.github.com>
+Date:   Thu Nov 21 21:41:07 2024 +0900
+
+    Initial commit
