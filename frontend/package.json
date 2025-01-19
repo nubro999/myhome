@@ -50,5 +50,8 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3"
   },
-  "proxy": "http://spring-boot-app:8080"
+  "proxy": [
+    "http://spring-boot-app:8080",
+    "http://localhost:8080"
+  ]
 }

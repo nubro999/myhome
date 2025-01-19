@@ -1,9 +1,9 @@
 package io.github.myhome.controller;
 
 import io.github.myhome.service.GalleryService;
+import io.github.myhome.service.S3Service;
 import io.github.myhome.domain.entity.Gallery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +16,20 @@ import java.util.List;
 public class GalleryController {
 
     private final GalleryService galleryService;
+    private final S3Service s3Service; // S3 관련 로직을 처리하기 위해 S3Service 주입
 
     // 모든 이미지 가져오기
     @GetMapping
     public ResponseEntity<List<Gallery>> getAllGallery() {
-        System.out.println("컨트롤러 이미지 가져오기");
-        return ResponseEntity.ok(galleryService.getAllGallery());
+        List<Gallery> galleries = galleryService.getAllGallery();
+
+        // 각 갤러리 객체에 S3 URL 설정
+        galleries.forEach(gallery -> {
+            String fileUrl = s3Service.getFileUrl(gallery.getFileName()); // S3 URL 생성
+            gallery.setFileUrl(fileUrl); // Gallery 객체에 S3 URL 설정
+        });
+
+        return ResponseEntity.ok(galleries);
     }
 
     // 이미지 업로드 (파일 & 추가 데이터)
@@ -33,7 +41,6 @@ public class GalleryController {
     ) {
         // Service 호출
         Gallery gallery = galleryService.uploadGallery(file, title, description);
-        System.out.println("이미지 업로드 가져오기");
         return ResponseEntity.ok(gallery);
     }
 
@@ -46,13 +53,10 @@ public class GalleryController {
 
     // S3에서 업로드된 파일 제공 (URL 리다이렉션)
     @GetMapping("/files/{fileName}")
-    public ResponseEntity<Void> getFile(@PathVariable String fileName) {
-        // S3 파일 URL 가져오기
-        String fileUrl = galleryService.getFileUrl(fileName);
-
-        // 클라이언트가 S3 URL로 바로 리다이렉트하도록 설정
-        return ResponseEntity.status(302) // HTTP 302 Found (리다이렉션)
-                .header(HttpHeaders.LOCATION, fileUrl)
-                .build();
+    public ResponseEntity<String> getFile(@PathVariable String fileName) {
+        // S3 URL 생성
+        String fileUrl = s3Service.getFileUrl(fileName);
+        return ResponseEntity.ok(fileUrl); // S3 URL을 직접 반환
     }
 }
+

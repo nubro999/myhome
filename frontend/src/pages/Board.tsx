@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Search, Trash } from 'lucide-react';
 import { format } from 'date-fns'; // 날짜 포맷팅 라이브러리
-import api from '../api/axios';
+import axios from 'axios';
 
 interface Post {
     id: number;
@@ -21,7 +21,7 @@ const Board = () => {
     const [newPost, setNewPost] = useState({ title: '', author: '', content: '', createAt: '', updateAt: '' });
 
     useEffect(() => {
-        api.get<Post[]>('/api/posts')
+        axios.get<Post[]>('/api/posts')
             .then((res) => {
                 setPosts(res.data);
                 setFilteredPosts(res.data);
@@ -41,7 +41,7 @@ const Board = () => {
 
     const handleCreatePost = async () => {
         try {
-            const res = await api.post<Post>('/api/posts', newPost);
+            const res = await axios.post<Post>('/api/posts', newPost);
             const updatedPosts = [...posts, res.data];
             setPosts(updatedPosts);
             setFilteredPosts(updatedPosts);
@@ -54,7 +54,7 @@ const Board = () => {
 
     const handleDeletePost = async (postId: number) => {
         try {
-            await api.delete(`/api/posts/${postId}`);
+            await axios.delete(`/api/posts/${postId}`);
             const updatedPosts = posts.filter((post) => post.id !== postId);
             setPosts(updatedPosts);
             setFilteredPosts(updatedPosts);

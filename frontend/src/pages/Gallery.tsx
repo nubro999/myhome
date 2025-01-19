@@ -5,7 +5,7 @@ import UploadModal from '../components/gallery/UploadModal';
 
 interface Gallery {
     id: number;
-    fileUrl: string; // Spring Boot에서 제공하는 이미지 URL
+    fileUrl: string; // S3 URL을 직접 반환받음
     title: string;
     description: string;
 }
@@ -30,7 +30,7 @@ const Gallery = () => {
             }
 
             const data: Gallery[] = await response.json();
-            setImages(data);
+            setImages(data); // S3 URL 포함된 데이터를 상태에 저장
         } catch (err: any) {
             console.error(err.message || '알 수 없는 오류가 발생했습니다.');
             setError(err.message || '알 수 없는 오류가 발생했습니다.');
@@ -110,6 +110,7 @@ const Gallery = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {images.map((image) => (
                         <div key={image.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                            {/* fileUrl은 S3 URL을 직접 반환받기 때문에 그대로 사용 */}
                             <img src={image.fileUrl} alt={image.title} className="w-full" />
                             <div className="p-4 flex justify-between items-center">
                                 <div>
