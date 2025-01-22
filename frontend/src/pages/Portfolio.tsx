@@ -155,12 +155,13 @@ const Portfolio = () => {
             {isModalOpen && (
                 <div className="modal modal-open">
                     <div className="modal-box">
-                        <h2 className="text-xl font-semibold mb-4">새 포트폴리오 추가</h2>
-                        <div className="grid grid-cols-1 gap-4 text-gray-600">
+                        {/* 텍스트 색상을 진하게 설정 */}
+                        <h2 className="text-xl font-bold text-gray-200 mb-4">새 포트폴리오 추가</h2>
+                        <div className="grid grid-cols-1 gap-4">
                             <input
                                 type="text"
                                 placeholder="프로젝트 제목"
-                                className="input input-bordered"
+                                className="input input-bordered placeholder-gray-800"
                                 value={newPortfolio.title}
                                 onChange={(e) =>
                                     setNewPortfolio({ ...newPortfolio, title: e.target.value })
@@ -169,7 +170,7 @@ const Portfolio = () => {
                             <input
                                 type="text"
                                 placeholder="설명"
-                                className="input input-bordered"
+                                className="input input-bordered placeholder-gray-800"
                                 value={newPortfolio.description}
                                 onChange={(e) =>
                                     setNewPortfolio({ ...newPortfolio, description: e.target.value })
@@ -178,7 +179,7 @@ const Portfolio = () => {
                             <input
                                 type="text"
                                 placeholder="태그 (쉼표로 구분)"
-                                className="input input-bordered"
+                                className="input input-bordered placeholder-gray-800"
                                 value={newPortfolio.tags}
                                 onChange={(e) =>
                                     setNewPortfolio({ ...newPortfolio, tags: e.target.value })
@@ -187,7 +188,7 @@ const Portfolio = () => {
                             <input
                                 type="text"
                                 placeholder="GitHub 링크"
-                                className="input input-bordered"
+                                className="input input-bordered placeholder-gray-800"
                                 value={newPortfolio.github}
                                 onChange={(e) =>
                                     setNewPortfolio({ ...newPortfolio, github: e.target.value })
@@ -196,7 +197,7 @@ const Portfolio = () => {
                             <input
                                 type="text"
                                 placeholder="데모 링크"
-                                className="input input-bordered"
+                                className="input input-bordered placeholder-gray-800"
                                 value={newPortfolio.demo}
                                 onChange={(e) =>
                                     setNewPortfolio({ ...newPortfolio, demo: e.target.value })
@@ -217,6 +218,7 @@ const Portfolio = () => {
                     </div>
                 </div>
             )}
+
         </div>
     );
 };

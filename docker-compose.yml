@@ -33,20 +33,6 @@ services:
     networks:
       - my-network
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx-container
-    ports:
-      - "80:80" # 호스트의 80번 포트를 컨테이너의 80번 포트에 매핑
-    volumes:
-      - ./nginx/nginx.conf:/full-myhome/nginx/nginx.conf:ro # nginx.conf 파일 마운트 (읽기 전용)
-      - ./nginx/conf.d:/full-myhome/nginx/conf.d:ro         # conf.d 디렉토리 마운트 (읽기 전용)
-      - ./frontend/build:/usr/share/nginx/html:ro      # React 빌드 파일 마운트
-    depends_on:
-      - backend
-    networks:
-      - my-network
-
 networks:
   my-network:
     driver: bridge
