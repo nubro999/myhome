@@ -52,6 +52,7 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "https://my-bucket-nubroo.s3.ap-southeast-2.amazonaws.com",
                 "https://nubrooo-qitr06rpr-nubro999s-projects.vercel.app",
+                "https://nubrooo.vercel.app",
                 "https://nubroo.click"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
