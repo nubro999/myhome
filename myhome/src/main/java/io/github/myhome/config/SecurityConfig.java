@@ -49,9 +49,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "http://localhost:3000",
                 "https://my-bucket-nubroo.s3.ap-southeast-2.amazonaws.com",
-                "https://nubrooo-qitr06rpr-nubro999s-projects.vercel.app",
                 "https://nubrooo.vercel.app",
                 "https://nubroo.click"
         ));
