@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, User } from 'lucide-react';
-import axios from 'axios';
+import instance from "../api/axios";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Register = () => {
 
         try {
             setError('');
-            const response = await axios.post('/api/auth/register', {
+            const response = await instance.post('/api/auth/register', {
                 username: formData.username,
                 password: formData.password
             });

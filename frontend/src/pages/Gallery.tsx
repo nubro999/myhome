@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Plus, Trash } from 'lucide-react'; // Trash 아이콘 추가
 import { useAuth } from '../contexts/AuthContext';
 import UploadModal from '../components/gallery/UploadModal';
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 interface Gallery {
     id: number;
@@ -23,7 +24,7 @@ const Gallery = () => {
         setError(null);
 
         try {
-            const response = await fetch(`/api/gallery`);
+            const response = await fetch(`${API_BASE_URL}/api/gallery`);
             if (!response.ok) {
                 console.error('API 호출 실패:', response.status, response.statusText);
                 throw new Error('이미지를 가져오는 데 실패했습니다.');
@@ -45,7 +46,7 @@ const Gallery = () => {
 
     const handleUpload = async (formData: FormData): Promise<void> => {
         try {
-            const response = await fetch('/api/gallery', {
+            const response = await fetch('${API_BASE_URL}/api/gallery', {
                 method: 'POST',
                 body: formData,
             });
@@ -71,7 +72,7 @@ const Gallery = () => {
         }
 
         try {
-            const response = await fetch(`/api/gallery/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/gallery/${id}`, {
                 method: 'DELETE',
             });
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Search, Trash } from 'lucide-react';
 import { format } from 'date-fns'; // 날짜 포맷팅 라이브러리
 import axios from 'axios';
+import instance from "../api/axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -23,7 +24,7 @@ const Board = () => {
     const [newPost, setNewPost] = useState({ title: '', author: '', content: '', createAt: '', updateAt: '' });
 
     useEffect(() => {
-        axios.get<Post[]>(`${API_URL}/api/posts`) // API_URL을 사용
+        instance.get<Post[]>(`${API_URL}/api/posts`) // API_URL을 사용
             .then((res) => {
                 setPosts(res.data);
                 setFilteredPosts(res.data);
@@ -43,7 +44,7 @@ const Board = () => {
 
     const handleCreatePost = async () => {
         try {
-            const res = await axios.post<Post>('${API_URL}/api/posts', newPost);
+            const res = await instance.post<Post>(`${API_URL}/api/posts`, newPost);
             const updatedPosts = [...posts, res.data];
             setPosts(updatedPosts);
             setFilteredPosts(updatedPosts);
@@ -56,7 +57,7 @@ const Board = () => {
 
     const handleDeletePost = async (postId: number) => {
         try {
-            await axios.delete(`${API_URL}/api/posts/${postId}`);
+            await instance.delete(`${API_URL}/api/posts/${postId}`);
             const updatedPosts = posts.filter((post) => post.id !== postId);
             setPosts(updatedPosts);
             setFilteredPosts(updatedPosts);

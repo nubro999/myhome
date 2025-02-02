@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
+import instance from "../api/axios";
+const API_URL = process.env.REACT_APP_API_URL; // 환경 변수에서 API URL 가져오기
 
 // User 인터페이스: username과 password만 포함
 interface User {
@@ -35,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 토큰 유효성 검사
     const validateToken = async (token: string): Promise<User | null> => {
         try {
-            const response = await fetch('/api/auth/validate-token', {
+            const response = await fetch(`${API_URL}/auth/validate-token`, { // API_URL 적용
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 로그인
     const login = async (username: string, password: string): Promise<void> => {
         try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch(`${API_URL}/auth/login`, { // API_URL 적용
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,7 +87,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 로그아웃
     const logout = async (): Promise<void> => {
         try {
-            await fetch('/api/auth/logout', {
+            await fetch(`${API_URL}/auth/logout`, { // API_URL 적용
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,4 +124,5 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         </AuthContext.Provider>
     );
 };
+
 

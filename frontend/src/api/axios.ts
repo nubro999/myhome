@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Axios 인스턴스 생성
 const instance = axios.create({
-    baseURL: '54.252.64.7:8080', // 백엔드 API 기본 URL
+    baseURL: process.env.REACT_APP_API_URL, // 백엔드 API 기본 URL
 });
 
 // 요청 인터셉터: Authorization 헤더 추가

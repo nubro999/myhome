@@ -27,9 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -50,12 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3",
-    "gh-pages": "^6.3.0"
-  },
-  "proxy": [
-    "http://spring-boot-app:8080",
-    "http://localhost:8080"
-  ],
-  "homepage": "https://nubro999.github.io/nubrooo"
+    "@types/react-router-dom": "^5.3.3"
+  }
 }

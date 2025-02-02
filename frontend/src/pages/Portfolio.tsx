@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Search, Trash } from 'lucide-react'; // 아이콘 추가
-import axios from 'axios';
+import instance from "../api/axios";
 
 interface Portfolio {
     id: number;
@@ -26,7 +26,7 @@ const Portfolio = () => {
 
     // 포트폴리오 가져오기
     useEffect(() => {
-        axios.get<Portfolio[]>('/api/portfolio')
+        instance.get<Portfolio[]>('/api/portfolio')
             .then((res) => {
                 setPortfolios(res.data);
                 setFilteredPortfolios(res.data);
@@ -48,7 +48,7 @@ const Portfolio = () => {
     // 새 포트폴리오 생성
     const handleCreatePortfolio = async () => {
         try {
-            const res = await axios.post<Portfolio>('/api/portfolio', {
+            const res = await instance.post<Portfolio>('/api/portfolio', {
                 ...newPortfolio,
                 tags: newPortfolio.tags.split(',').map((tag) => tag.trim()),
             });
@@ -65,7 +65,7 @@ const Portfolio = () => {
     // 포트폴리오 삭제
     const handleDeletePortfolio = async (portfolioId: number) => {
         try {
-            await axios.delete(`/api/portfolio/${portfolioId}`);
+            await instance.delete(`/api/portfolio/${portfolioId}`);
             const updatedPortfolios = portfolios.filter((portfolio) => portfolio.id !== portfolioId);
             setPortfolios(updatedPortfolios);
             setFilteredPortfolios(updatedPortfolios); // portfolios와 filteredPortfolios 동기화
