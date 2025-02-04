@@ -15,7 +15,7 @@ services:
       - my-network
 
   backend:
-    image: nubroo/spring-boot:last
+    image: nubroo/spring-boot:lastest
     container_name: spring-boot-app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/mydb
